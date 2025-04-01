@@ -22,13 +22,13 @@ class MainDrawer extends StatelessWidget {
 
   Future<void> _redirectGithub() async {
     if (!await launchUrl(Uri.parse("https://github.com/Ilusinusmate"))) {
-      print("An error ocurred trying to acess the url");
+      debugPrint("An error ocurred trying to acess the url");
     }
   }
 
   Future<void> _redirectAuthor() async {
     if (!await launchUrl(Uri.parse("https://github.com/Ilusinusmate"))) {
-      print("An error ocurred trying to acess the url");
+      debugPrint("An error ocurred trying to acess the url");
     }
   }
 

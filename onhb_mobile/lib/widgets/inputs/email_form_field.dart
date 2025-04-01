@@ -23,12 +23,12 @@ class EmailFormField extends StatelessWidget implements BaseFormField {
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter your email";
+      return "Por favor insira um email";
     }
     if (!RegExp(
       r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$',
     ).hasMatch(value)) {
-      return "Enter a valid email";
+      return "Insira um email válido";
     }
     return null;
   }

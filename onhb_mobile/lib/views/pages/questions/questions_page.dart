@@ -138,7 +138,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   void _setAnswer(int questionIndex, int value) {
     setState(() {
       _answers[questionIndex] = value;
-      print(_answers);
+      debugPrint(_answers.toString());
     });
   }
 

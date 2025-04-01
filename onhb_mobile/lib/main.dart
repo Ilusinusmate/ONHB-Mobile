@@ -6,18 +6,18 @@ import 'package:onhb_mobile/views/widget_tree.dart';
 void main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-    print("Flutter binding initialized");
+    debugPrint("Flutter binding initialized");
     
     // Clear all data and start fresh (temporary fix)
     // await Hive.deleteFromDisk();
-    // print("Deleted all Hive data from disk");
+    // debugPrint("Deleted all Hive data from disk");
     
     await StorageSystem.initHive();
-    print("Storage system initialized");
+    debugPrint("Storage system initialized");
     
     runApp(const MyApp());
   } catch (e) {
-    print("Fatal error during initialization: $e");
+    debugPrint("Fatal error during initialization: $e");
   }
 }
 

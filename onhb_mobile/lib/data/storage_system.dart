@@ -1,3 +1,4 @@
+import "package:flutter/rendering.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:onhb_mobile/data/models/team.dart";
 
@@ -24,12 +25,12 @@ class StorageSystem {
 
       // Then open the box
       var box = await Hive.openBox(_boxName);
-      print("Box opened with keys: ${box.keys.toList().toString()}");
+      debugPrint("Box opened with keys: ${box.keys.toList().toString()}");
 
       _initialized = true;
-      print("Hive initialization complete");
+      debugPrint("Hive initialization complete");
     } catch (e) {
-      print("Error initializing Hive: $e");
+      debugPrint("Error initializing Hive: $e");
       rethrow;
     }
   }
@@ -156,14 +157,14 @@ class TeamStorageSystem extends StorageSystem {
     if (!teamExists) {
       currentTeams.add(team);
       await StorageSystem.saveList<Team>(_teamsListKey, currentTeams);
-      print("Team added to teams list: ${team.teamName}");
+      debugPrint("Team added to teams list: ${team.teamName}");
     } else {
       // Update the existing team in the list
       int index = currentTeams.indexWhere((t) => t.teamName == team.teamName);
       if (index != -1) {
         currentTeams[index] = team;
         await StorageSystem.saveList<Team>(_teamsListKey, currentTeams);
-        print("Team updated in teams list: ${team.teamName}");
+        debugPrint("Team updated in teams list: ${team.teamName}");
       }
     }
   }
@@ -177,14 +178,14 @@ class TeamStorageSystem extends StorageSystem {
     if (!teamExists) {
       currentTeams.add(team);
       StorageSystem.saveListSync<Team>(_teamsListKey, currentTeams);
-      print("Team added to teams list (sync): ${team.teamName}");
+      debugPrint("Team added to teams list (sync): ${team.teamName}");
     } else {
       // Update the existing team in the list
       int index = currentTeams.indexWhere((t) => t.teamName == team.teamName);
       if (index != -1) {
         currentTeams[index] = team;
         StorageSystem.saveListSync<Team>(_teamsListKey, currentTeams);
-        print("Team updated in teams list (sync): ${team.teamName}");
+        debugPrint("Team updated in teams list (sync): ${team.teamName}");
       }
     }
   }
@@ -200,14 +201,14 @@ class TeamStorageSystem extends StorageSystem {
   /// Get the list of all teams asynchronously
   static Future<List<Team>> getTeamsList() async {
     var teams = await StorageSystem.loadList<Team>(_teamsListKey);
-    print("Retrieved teams list: ${teams.length} teams");
+    debugPrint("Retrieved teams list: ${teams.length} teams");
     return teams;
   }
 
   /// Get the list of all teams synchronously
   static List<Team> getTeamsListSync() {
     var teams = StorageSystem.loadListSync<Team>(_teamsListKey);
-    print("Retrieved teams list (sync): ${teams.length} teams");
+    debugPrint("Retrieved teams list (sync): ${teams.length} teams");
     return teams;
   }
 
@@ -215,14 +216,14 @@ class TeamStorageSystem extends StorageSystem {
   static Future<void> saveTeam(Team team) async {
     await StorageSystem.saveElement<Team>(team.teamName, team);
     await updateTeamsList(team);
-    print("Team saved with name: ${team.teamName}");
+    debugPrint("Team saved with name: ${team.teamName}");
   }
 
   /// Save a team and update teams list synchronously
   static void saveTeamSync(Team team) {
     StorageSystem.saveElementSync<Team>(team.teamName, team);
     updateTeamsListSync(team);
-    print("Team saved with name (sync): ${team.teamName}");
+    debugPrint("Team saved with name (sync): ${team.teamName}");
   }
 
   /// Get a team by name asynchronously
@@ -244,7 +245,7 @@ class TeamStorageSystem extends StorageSystem {
     await StorageSystem.saveList<Team>(_teamsListKey, currentTeams);
 
     // Log the deletion
-    print("Deleted team: $teamName");
+    debugPrint("Deleted team: $teamName");
   }
 
   /// Check if a team exists synchronously
@@ -256,14 +257,14 @@ class TeamStorageSystem extends StorageSystem {
 class GabaritoStorageSystem {
   static void saveGabarito(Map<int, int> gabarito) {
     StorageSystem.saveMapSync(StorageSystem.gabaritoKey, gabarito);
-    print("Saved gabarito: $gabarito");
+    debugPrint("Saved gabarito: $gabarito");
   }
 
   static Map<int, int> getGabarito() {
     var gabarito = StorageSystem.loadMapSync<int, int>(
       StorageSystem.gabaritoKey,
     );
-    print("Got gabarito: $gabarito");
+    debugPrint("Got gabarito: $gabarito");
     return gabarito;
   }
 }

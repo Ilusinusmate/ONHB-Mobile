@@ -24,11 +24,11 @@ class TeamNameFormField extends StatelessWidget implements BaseFormField {
 
   String? _validator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter your team name";
+      return "Por favor insira o nome da equipe";
     }
 
     if (TeamStorageSystem.teamExistsSync(value)) {
-      return "Team name already in use";
+      return "Nome da equipe já utilizado";
     }
 
     return null;

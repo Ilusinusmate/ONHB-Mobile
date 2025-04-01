@@ -84,13 +84,15 @@ class _TeamPageState extends State<TeamPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NewTeamPage()),
+        context,
+        MaterialPageRoute(builder: (context) => NewTeamPage()),
           );
 
           // Recarrega os dados quando a página retorna
           _loadTeamNames();
         },
+        shape: const CircleBorder(),
+        tooltip: "Adicionar equipe",
         child: const Icon(Icons.add),
       ),
       body:
